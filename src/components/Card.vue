@@ -1,6 +1,10 @@
 <template>
     <div class="card w-100 h-100 pt-2 justify-center shadow items-center ">
-      <div class="flex-col items-center justify-center ">
+      <div class="flex pt-2">
+            <input type="text" name="task" class="border-1 ml-2 rounded h-10 w-60 outline-none text-gray-600 text-sm focus:border-green-800 border-green-800" v-model="capital">
+            <button @click="assignValueToCityName" class="ml-5 bg-gray-600 rounded text-white font-semibold w-40 hover:bg-green-800">Chercher</button>
+          </div>
+      <div class="flex-col items-center justify-center pt-4">
         <h1 class="text-3xl font-bold hover:text-blue-800 cursor-pointer mb-2 ml-7">{{cityName}}</h1>
         <p class="mb-2 italic">Chance of rain: {{chanceOfRain}}%</p>
       </div>
@@ -18,12 +22,17 @@
     import Prevision from "../components/Prevision.vue";
     import { ref, onMounted} from 'vue';
   
-  const cityName = 'Paris';
+  const cityName = ref(null);
   const chanceOfRain = ref(0);
   const temperature = ref(null);
   const updated = ref(null)
   const text = ref(null)
   const icon = ref(null)
+  const capital = ref(null)
+
+  function assignValueToCityName() {
+    cityName.value = capital.value;
+    }
   
   const fetchWeatherData = async () => {
     try {
